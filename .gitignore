@@ -1,0 +1,32 @@
+ Task-02: Sudoku Solver
+
+ Description:
+This project implements a Sudoku Solver using Java.  
+The program automatically solves a 9×9 Sudoku puzzle using the
+backtracking algorithm.
+
+ Technologies Used:
+- Java
+- Backtracking Algorithm
+- 2D Arrays
+
+ Algorithm Used:
+The backtracking technique is used to try possible numbers in empty
+cells. If a number violates Sudoku rules, the algorithm backtracks
+and tries a different number until the puzzle is solved.
+
+Input:
+A partially filled 9×9 Sudoku grid where empty cells are represented
+by 0.
+
+Output:
+The completed Sudoku grid is displayed after solving the puzzle.
+
+Project Files:
+- `SudokuSolver.java` – Java source code for solving Sudoku
+- `README.md` – Project documentation
+
+How to Run:
+```bash
+javac SudokuSolver.java
+java SudokuSolver
