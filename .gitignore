@@ -27,7 +27,7 @@
         }
     }
 
-    // Backtracking algorithm
+    
     private static boolean solveSudoku(int[][] board) {
 
         for (int row = 0; row < SIZE; row++) {
@@ -54,7 +54,7 @@
         return true;
     }
 
-    // Check validity
+    
     private static boolean isValid(int[][] board, int row, int col, int num) {
 
         // Row check
@@ -64,14 +64,14 @@
             }
         }
 
-        // Column check
+        
         for (int x = 0; x < SIZE; x++) {
             if (board[x][col] == num) {
                 return false;
             }
         }
 
-        // 3x3 grid check
+        
         int startRow = row - row % 3;
         int startCol = col - col % 3;
 
@@ -85,7 +85,7 @@
         return true;
     }
 
-    // Print board
+    
     private static void printBoard(int[][] board) {
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
