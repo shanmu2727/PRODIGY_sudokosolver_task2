@@ -1,32 +1,97 @@
- Task-02: Sudoku Solver
+ public class SudokuSolver {
 
- Description:
-This project implements a Sudoku Solver using Java.  
-The program automatically solves a 9×9 Sudoku puzzle using the
-backtracking algorithm.
+    private static final int SIZE = 9;
 
- Technologies Used:
-- Java
-- Backtracking Algorithm
-- 2D Arrays
+    public static void main(String[] args) {
 
- Algorithm Used:
-The backtracking technique is used to try possible numbers in empty
-cells. If a number violates Sudoku rules, the algorithm backtracks
-and tries a different number until the puzzle is solved.
+        int[][] board = {
+                {5, 3, 0, 0, 7, 0, 0, 0, 0},
+                {6, 0, 0, 1, 9, 5, 0, 0, 0},
+                {0, 9, 8, 0, 0, 0, 0, 6, 0},
+                {8, 0, 0, 0, 6, 0, 0, 0, 3},
+                {4, 0, 0, 8, 0, 3, 0, 0, 1},
+                {7, 0, 0, 0, 2, 0, 0, 0, 6},
+                {0, 6, 0, 0, 0, 0, 2, 8, 0},
+                {0, 0, 0, 4, 1, 9, 0, 0, 5},
+                {0, 0, 0, 0, 8, 0, 0, 7, 9}
+        };
 
-Input:
-A partially filled 9×9 Sudoku grid where empty cells are represented
-by 0.
+        System.out.println("Original Sudoku:");
+        printBoard(board);
 
-Output:
-The completed Sudoku grid is displayed after solving the puzzle.
+        if (solveSudoku(board)) {
+            System.out.println("\nSolved Sudoku:");
+            printBoard(board);
+        } else {
+            System.out.println("No solution exists.");
+        }
+    }
 
-Project Files:
-- `SudokuSolver.java` – Java source code for solving Sudoku
-- `README.md` – Project documentation
+    // Backtracking algorithm
+    private static boolean solveSudoku(int[][] board) {
 
-How to Run:
-```bash
-javac SudokuSolver.java
-java SudokuSolver
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+
+                if (board[row][col] == 0) {
+
+                    for (int num = 1; num <= 9; num++) {
+
+                        if (isValid(board, row, col, num)) {
+                            board[row][col] = num;
+
+                            if (solveSudoku(board)) {
+                                return true;
+                            } else {
+                                board[row][col] = 0;
+                            }
+                        }
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    // Check validity
+    private static boolean isValid(int[][] board, int row, int col, int num) {
+
+        // Row check
+        for (int x = 0; x < SIZE; x++) {
+            if (board[row][x] == num) {
+                return false;
+            }
+        }
+
+        // Column check
+        for (int x = 0; x < SIZE; x++) {
+            if (board[x][col] == num) {
+                return false;
+            }
+        }
+
+        // 3x3 grid check
+        int startRow = row - row % 3;
+        int startCol = col - col % 3;
+
+        for (int i = startRow; i < startRow + 3; i++) {
+            for (int j = startCol; j < startCol + 3; j++) {
+                if (board[i][j] == num) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    // Print board
+    private static void printBoard(int[][] board) {
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                System.out.print(board[row][col] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
